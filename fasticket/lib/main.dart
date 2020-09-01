@@ -1,6 +1,6 @@
-  
+
 import 'package:flutter/material.dart';
-import 'package:fasticket/loginpage.dart';
+import 'package:fasticket/view/loginpage.dart';
 
 
 void main() => runApp(FasticketApp());

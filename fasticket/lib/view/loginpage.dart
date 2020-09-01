@@ -1,4 +1,4 @@
-import 'package:fasticket/profile.dart';
+import 'package:fasticket/view/profile.dart';
 import 'package:flutter/material.dart';
 
 
