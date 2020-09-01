@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -16,10 +17,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Column buildColumn() {
     return Column(children: [
-    buildTitleTextAndIcon(),
-    buildEmail(),
-    buildPassword()],);
+    Expanded(flex:4,child: buildTitleTextAndIcon()),
+    Expanded(flex:2,child: buildEmail()),
+    Expanded(flex:2,child: buildPassword()),
+    Expanded(flex:2,child: buildLoginButton())],);
   }
+
+  RaisedButton buildLoginButton() => RaisedButton(onPressed: () {}, child: const Text("Login"),color: Colors.blue,);
 
 
   Row buildTitleTextAndIcon() {
@@ -45,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
   TextField buildPassword() {
     return TextField(decoration:
   InputDecoration(icon: Icon(Icons.lock_outline, color: Colors.grey[600],),
-                  hintText: "Password:"),);
+                  hintText: "Password:"),obscureText: true,);
   }
 
 
