@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fasticket/view/buyticket.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -25,9 +26,9 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       Expanded(flex:1, child: buildWelcomeText()),
       Spacer(flex:1),
-      Expanded(flex:1, child: buildBuyTicketButton()),
+      buildBuyTicketButton(),
       Spacer(flex:1),
-      Expanded(flex:1, child: buildMyTicketsButton()),
+      buildMyTicketsButton(),
       Spacer()
 ],
 
@@ -36,7 +37,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   RaisedButton buildMyTicketsButton() => RaisedButton(child: buildMyTicketsText(),color: Colors.red[400], splashColor: Colors.blueAccent[300],onPressed: () {},);
 
-  RaisedButton buildBuyTicketButton() => RaisedButton(child: buildBuyTicketText(),color: Colors.red[400], splashColor: Colors.blueAccent[300],onPressed: () {},);
+  RaisedButton buildBuyTicketButton() => RaisedButton(child: buildBuyTicketText(),color: Colors.red[400], splashColor: Colors.blueAccent[300],onPressed: () {
+    Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BuyTicket()));
+  },);
 
   Text buildMyTicketsText() => const Text("My Tickets", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),);
 
@@ -49,12 +54,21 @@ class _ProfilePageState extends State<ProfilePage> {
   Image buildProfileImage() => Image(image: AssetImage("assets/vb.jpg"));
 
   AppBar buildProfileAppBar() {
-    return AppBar(actions: <Widget>[
-      buildAppBarNotifications(),
-      buildAppBarMenu()
+    return AppBar(
+      automaticallyImplyLeading: false,
+      actions: <Widget>[
+      Row(
+        children: [
+          buildBackButton(),
+          buildAppBarNotifications(),
+          buildAppBarMenu(),
+        ],
+      )
     ], title: buildAppBarText(), centerTitle: true,
     backgroundColor: Colors.blue[550],);
   }
+
+  IconButton buildBackButton() => IconButton(icon: Icon(Icons.arrow_back_ios), color: Colors.white,onPressed: (){Navigator.pop(context);});
 
   IconButton buildAppBarNotifications() => IconButton(icon: Icon(Icons.notifications), onPressed: () {},);
   IconButton buildAppBarMenu() => IconButton(icon: Icon(Icons.menu), onPressed: () {},);
