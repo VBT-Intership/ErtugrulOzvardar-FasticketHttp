@@ -1,4 +1,4 @@
-  
+
 class FlightsModel {
   String fromLocation;
   String toLocation;
