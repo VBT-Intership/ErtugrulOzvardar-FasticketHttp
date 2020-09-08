@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fasticket/view/buyticket.dart';
-
+import 'package:fasticket/view/http_buyticket.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -17,22 +16,30 @@ class _ProfilePageState extends State<ProfilePage> {
       );
   }
 
-  Column buildColumn() {
+  Row buildColumn() {
+    return Row(
+      children: [
+        Spacer(flex:2),
+        Expanded(flex:6,
+                child: columnProperties(),
+        ),
+        Spacer(flex:2)
+      ],
+    );
+  }
+
+  Column columnProperties() {
     return Column(
-      children:[
-      Padding(
-        padding: const EdgeInsets.only(top:125.0, right:125.0, left:125.0),
-        child: Expanded(flex:2,child: buildCard()),
-      ),
-      Expanded(flex:1, child: buildWelcomeText()),
-      Spacer(flex:1),
-      buildBuyTicketButton(),
-      Spacer(flex:1),
-      buildMyTicketsButton(),
-      Spacer()
+          children:[
+          Expanded(flex:3,child: buildCard()),
+          Expanded(flex:3, child: buildWelcomeText()),
+          Expanded(flex:1,child: buildBuyTicketButton()),
+          Spacer(flex:1),
+          Expanded(flex:1,child: buildMyTicketsButton()),
+          Spacer(flex:1)
 ],
 
-    );
+        );
   }
 
   RaisedButton buildMyTicketsButton() => RaisedButton(child: buildMyTicketsText(),color: Colors.red[400], splashColor: Colors.blueAccent[300],onPressed: () {},);
@@ -40,14 +47,14 @@ class _ProfilePageState extends State<ProfilePage> {
   RaisedButton buildBuyTicketButton() => RaisedButton(child: buildBuyTicketText(),color: Colors.red[400], splashColor: Colors.blueAccent[300],onPressed: () {
     Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BuyTicket()));
+              MaterialPageRoute(builder: (context) => HttpBuyTicket()));
   },);
 
   Text buildMyTicketsText() => const Text("My Tickets", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),);
 
   Text buildBuyTicketText() => const Text("Buy Ticket", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),);
 
-  Text buildWelcomeText() => Text("Welcome Veli!", softWrap: true, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 42),);
+  FittedBox buildWelcomeText() => FittedBox(fit:BoxFit.contain, child: Text("Welcome Veli!", softWrap: true, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,),));
 
   Card buildCard() => Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(250.0)),child: ClipRRect(borderRadius:BorderRadius.circular(500.0), child: buildProfileImage()));
 
@@ -58,13 +65,16 @@ class _ProfilePageState extends State<ProfilePage> {
       automaticallyImplyLeading: false,
       actions: <Widget>[
       Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildBackButton(),
+          buildAppBarText(),
           buildAppBarNotifications(),
           buildAppBarMenu(),
+
         ],
       )
-    ], title: buildAppBarText(), centerTitle: true,
+    ],
     backgroundColor: Colors.blue[550],);
   }
 
